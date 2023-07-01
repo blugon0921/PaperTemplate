@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.8.21"
     id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.papermc.paperweight.userdev") version "1.5.3"
 }
 
 java {
@@ -15,14 +16,13 @@ val kotlinVersion = kotlin.coreLibrariesVersion
 
 repositories {
     mavenCentral()
-    maven("https://papermc.io/repo/repository/maven-public/")
     maven("https://repo.blugon.kr/repository/maven-public/")
 }
 
 dependencies {
     compileOnly(kotlin("stdlib"))
     compileOnly(kotlin("reflect"))
-    compileOnly("io.papermc.paper:paper-api:${mcVersion}-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("${mcVersion}-R0.1-SNAPSHOT")
 //    compileOnly("io.github.monun:invfx-api:latest.release")
     compileOnly("io.github.monun:kommand-api:latest.release")
     compileOnly("io.github.monun:tap-api:latest.release")
