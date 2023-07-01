@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.8.21"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 java {
@@ -15,15 +16,17 @@ val kotlinVersion = kotlin.coreLibrariesVersion
 repositories {
     mavenCentral()
     maven("https://papermc.io/repo/repository/maven-public/")
+    maven("https://repo.blugon.kr/repository/maven-public/")
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation(kotlin("reflect"))
+    compileOnly(kotlin("stdlib"))
+    compileOnly(kotlin("reflect"))
     compileOnly("io.papermc.paper:paper-api:${mcVersion}-R0.1-SNAPSHOT")
-//    implementation("io.github.monun:invfx-api:latest.release")
-    implementation("io.github.monun:kommand-api:latest.release")
-    implementation("io.github.monun:tap-api:latest.release")
+//    compileOnly("io.github.monun:invfx-api:latest.release")
+    compileOnly("io.github.monun:kommand-api:latest.release")
+    compileOnly("io.github.monun:tap-api:latest.release")
+    implementation("kr.blugon:pluginPlus:latest.release")
 }
 
 extra.apply {
@@ -48,6 +51,24 @@ tasks {
     }
 
     create<Jar>("buildPaper") {
+        val file = File("./build/libs/${project.name}.jar")
+        if(file.exists()) file.deleteOnExit()
+        archiveBaseName.set(project.name) //Project Name
+        archiveFileName.set("${project.name}.jar") //Build File Name
+        archiveVersion.set(project.version.toString()) //Version
+        from(sourceSets["main"].output)
+
+        doLast {
+            copy {
+                from(archiveFile) //Copy from
+                into(buildPath) //Copy to
+            }
+        }
+    }
+
+    shadowJar {
+        val file = File("./build/libs/${project.name}.jar")
+        if(file.exists()) file.deleteOnExit()
         archiveBaseName.set(project.name) //Project Name
         archiveFileName.set("${project.name}.jar") //Build File Name
         archiveVersion.set(project.version.toString()) //Version
