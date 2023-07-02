@@ -10,7 +10,7 @@ java {
     }
 }
 
-val buildPath = File("C:/Files/Minecraft/Servers/Test/plugins")
+val buildPath = File("C:/Files/Minecraft/Servers/Default/plugins")
 val mcVersion = "1.20.1"
 val kotlinVersion = kotlin.coreLibrariesVersion
 
