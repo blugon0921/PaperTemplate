@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.20"
+    kotlin("jvm") version "1.9.21"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("io.papermc.paperweight.userdev") version "1.5.9"
 }
@@ -11,7 +11,7 @@ java {
 }
 
 val buildPath = File("C:/Files/Minecraft/Servers/Default/plugins")
-val mcVersion = "1.20.2"
+val mcVersion = "1.20.4"
 val kotlinVersion = kotlin.coreLibrariesVersion
 
 repositories {
@@ -24,7 +24,7 @@ dependencies {
     compileOnly(kotlin("reflect"))
     paperweight.paperDevBundle("${mcVersion}-R0.1-SNAPSHOT")
 //    compileOnly("io.github.monun:invfx-api:latest.release")
-    compileOnly("io.github.monun:kommand-api:latest.release")
+//    compileOnly("io.github.monun:kommand-api:latest.release")
     implementation("kr.blugon:pluginPlus:latest.release")
 }
 
@@ -34,7 +34,7 @@ extra.apply {
     set("KotlinVersion", kotlinVersion)
     set("MinecraftVersion", mcVersion.split(".").subList(0, 2).joinToString("."))
 //    set("invfx", "io.github.monun:invfx-core:3.3.2")
-    set("kommand", "io.github.monun:kommand-core:3.1.8")
+//    set("kommand", "io.github.monun:kommand-core:3.1.8")
 }
 
 tasks {
