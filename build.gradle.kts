@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.21"
+    kotlin("jvm") version "1.9.22"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("io.papermc.paperweight.userdev") version "1.5.9"
 }
@@ -50,34 +50,26 @@ tasks {
     }
 
     create<Jar>("buildPaper") {
-        val file = File("./build/libs/${project.name}.jar")
-        if(file.exists()) file.deleteOnExit()
-        archiveBaseName.set(project.name) //Project Name
-        archiveFileName.set("${project.name}.jar") //Build File Name
-        archiveVersion.set(project.version.toString()) //Version
-        from(sourceSets["main"].output)
-
-        doLast {
-            copy {
-                from(archiveFile) //Copy from
-                into(buildPath) //Copy to
-            }
-        }
+        this.build()
     }
 
     shadowJar {
-        val file = File("./build/libs/${project.name}.jar")
-        if(file.exists()) file.deleteOnExit()
-        archiveBaseName.set(project.name) //Project Name
-        archiveFileName.set("${project.name}.jar") //Build File Name
-        archiveVersion.set(project.version.toString()) //Version
-        from(sourceSets["main"].output)
+        this.build()
+    }
+}
 
-        doLast {
-            copy {
-                from(archiveFile) //Copy from
-                into(buildPath) //Copy to
-            }
+fun Jar.build() {
+    val file = File("./build/libs/${project.name}.jar")
+    if(file.exists()) file.deleteOnExit()
+    archiveBaseName.set(project.name) //Project Name
+    archiveFileName.set("${project.name}.jar") //Build File Name
+    archiveVersion.set(project.version.toString()) //Version
+    from(sourceSets["main"].output)
+
+    doLast {
+        copy {
+            from(archiveFile) //Copy from
+            into(buildPath) //Copy to
         }
     }
 }
