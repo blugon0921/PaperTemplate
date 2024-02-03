@@ -1,11 +1,25 @@
 package kr.blugon.papertemplate
 
+import kr.blugon.papertemplate.command.RootCommand
+import kr.blugon.pluginplus.command.registerCommands
+import kr.blugon.pluginplus.firework.initFireworkEffect
+import org.bukkit.Bukkit
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
 class PaperTemplate : JavaPlugin(), Listener {
+    companion object {
+        lateinit var plugin: JavaPlugin
+    }
+
     override fun onEnable() {
+        plugin = this
         logger.info("Plugin enabled")
+        Bukkit.getPluginManager().registerEvents(this, this)
+        initFireworkEffect()
+
+        val rootCommand = RootCommand()
+        registerCommands(rootCommand, rootCommand, "")
     }
 
     override fun onDisable() {

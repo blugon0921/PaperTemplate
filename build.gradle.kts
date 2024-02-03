@@ -23,8 +23,6 @@ dependencies {
     compileOnly(kotlin("stdlib"))
     compileOnly(kotlin("reflect"))
     paperweight.paperDevBundle("${mcVersion}-R0.1-SNAPSHOT")
-//    compileOnly("io.github.monun:invfx-api:latest.release")
-//    compileOnly("io.github.monun:kommand-api:latest.release")
     implementation("kr.blugon:pluginPlus:latest.release")
 }
 
@@ -33,8 +31,6 @@ extra.apply {
     set("ProjectVersion", project.version)
     set("KotlinVersion", kotlinVersion)
     set("MinecraftVersion", mcVersion.split(".").subList(0, 2).joinToString("."))
-//    set("invfx", "io.github.monun:invfx-core:3.3.2")
-//    set("kommand", "io.github.monun:kommand-core:3.1.8")
 }
 
 tasks {
