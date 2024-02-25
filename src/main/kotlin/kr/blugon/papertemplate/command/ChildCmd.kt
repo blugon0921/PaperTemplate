@@ -1,7 +1,7 @@
 package kr.blugon.papertemplate.command
 
-import kr.blugon.pluginplus.command.ChildCommand
-import kr.blugon.pluginplus.command.CommandData
+import kr.blugon.pluginutils.command.ChildCommand
+import kr.blugon.pluginutils.command.CommandData
 import org.bukkit.entity.Player
 
 class ChildCmd (private val command: CommandData): ChildCommand {

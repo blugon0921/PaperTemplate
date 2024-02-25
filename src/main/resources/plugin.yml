@@ -6,3 +6,4 @@ author: Blugon
 libraries:
   - org.jetbrains.kotlin:kotlin-stdlib:${KotlinVersion}
   - org.jetbrains.kotlin:kotlin-reflect:${KotlinVersion}
+  - xyz.icetang.lib:kommand-core:${kommand}

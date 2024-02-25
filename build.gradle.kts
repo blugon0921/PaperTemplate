@@ -13,6 +13,7 @@ java {
 val buildPath = File("C:/Files/Minecraft/Servers/Default/plugins")
 val mcVersion = "1.20.4"
 val kotlinVersion = kotlin.coreLibrariesVersion
+val kommandVersion = "3.1.11"
 
 repositories {
     mavenCentral()
@@ -23,7 +24,8 @@ dependencies {
     compileOnly(kotlin("stdlib"))
     compileOnly(kotlin("reflect"))
     paperweight.paperDevBundle("${mcVersion}-R0.1-SNAPSHOT")
-    implementation("kr.blugon:pluginPlus:latest.release")
+    implementation("kr.blugon:plugin-utils:latest.release")
+    compileOnly("xyz.icetang.lib:kommand-api:${kommandVersion}")
 }
 
 extra.apply {
@@ -31,6 +33,7 @@ extra.apply {
     set("ProjectVersion", project.version)
     set("KotlinVersion", kotlinVersion)
     set("MinecraftVersion", mcVersion.split(".").subList(0, 2).joinToString("."))
+    set("kommand", kommandVersion)
 }
 
 tasks {
