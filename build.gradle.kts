@@ -25,6 +25,7 @@ dependencies {
     compileOnly(kotlin("reflect"))
     paperweight.paperDevBundle("${mcVersion}-R0.1-SNAPSHOT")
     implementation("kr.blugon:plugin-utils:latest.release")
+    implementation("kr.blugon:mini-color:latest.release")
     compileOnly("xyz.icetang.lib:kommand-api:${kommandVersion}")
 }
 
