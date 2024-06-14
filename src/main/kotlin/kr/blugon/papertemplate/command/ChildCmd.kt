@@ -1,20 +1,19 @@
 package kr.blugon.papertemplate.command
 
+import kr.blugon.kotlinbrigadier.BrigadierCommand
+import kr.blugon.kotlinbrigadier.player
 import kr.blugon.pluginutils.command.ChildCommand
 import kr.blugon.pluginutils.command.CommandData
 import org.bukkit.entity.Player
+import org.bukkit.plugin.java.JavaPlugin
 
-class ChildCmd (private val command: CommandData): ChildCommand {
-    override val commandName = "example"
-    override var args = arrayListOf("")
-
+class ChildCmd (val plugin: JavaPlugin, val registrar: BrigadierCommand) {
     init {
-        if(args.size == 1) args = arrayListOf("example", "template")
-    }
-
-    override fun onCommand(): Boolean {
-        if(command.sender !is Player) return false
-        val player = command.sender
-        return true
+        registrar.register("child") {
+            executes {
+                player.sendMessage("Child command")
+                true
+            }
+        }
     }
 }

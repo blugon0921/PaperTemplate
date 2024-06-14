@@ -1,19 +1,20 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    kotlin("jvm") version "1.9.22"
+    kotlin("jvm") version "2.0.0"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.papermc.paperweight.userdev") version "1.7.0"
+    id("io.papermc.paperweight.userdev") version "1.7.1"
 }
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
 val buildPath = File("C:/Files/Minecraft/Servers/Default/plugins")
-val mcVersion = "1.20.4"
+val mcVersion = "1.20.6"
 val kotlinVersion = kotlin.coreLibrariesVersion
-val kommandVersion = "3.1.11"
 
 repositories {
     mavenCentral()
@@ -26,7 +27,7 @@ dependencies {
     paperweight.paperDevBundle("${mcVersion}-R0.1-SNAPSHOT")
     implementation("kr.blugon:plugin-utils:latest.release")
     implementation("kr.blugon:mini-color:latest.release")
-    compileOnly("xyz.icetang.lib:kommand-api:${kommandVersion}")
+    implementation("kr.blugon:kotlin-brigadier:latest.release")
 }
 
 extra.apply {
@@ -34,12 +35,13 @@ extra.apply {
     set("ProjectVersion", project.version)
     set("KotlinVersion", kotlinVersion)
     set("MinecraftVersion", mcVersion.split(".").subList(0, 2).joinToString("."))
-    set("kommand", kommandVersion)
 }
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
+        }
     }
 
     processResources {
