@@ -12,7 +12,6 @@ class ChildCmd (val plugin: JavaPlugin, val registrar: BrigadierCommand) {
         registrar.register("child") {
             executes {
                 player.sendMessage("Child command")
-                true
             }
         }
     }

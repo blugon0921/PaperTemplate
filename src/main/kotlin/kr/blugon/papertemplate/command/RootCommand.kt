@@ -1,5 +1,6 @@
 package kr.blugon.papertemplate.command
 
+import kr.blugon.kotlinbrigadier.registerCommandHandler
 import kr.blugon.kotlinbrigadier.registerEventHandler
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -8,7 +9,7 @@ class RootCommand(val plugin: JavaPlugin) {
 
     init {
         val manager = plugin.lifecycleManager
-        manager.registerEventHandler {
+        manager.registerCommandHandler {
             ChildCmd(plugin, this)
         }
     }
