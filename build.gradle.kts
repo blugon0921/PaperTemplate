@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    kotlin("jvm") version "2.0.0"
+    kotlin("jvm") version "2.0.10"
     id("com.gradleup.shadow") version "8.3.0"
     id("io.papermc.paperweight.userdev") version "1.7.2"
 }
@@ -13,7 +13,7 @@ java {
 }
 
 val buildPath = File("C:/Files/Minecraft/Servers/Default/plugins")
-val mcVersion = "1.21"
+val mcVersion = "1.21.1"
 val kotlinVersion = kotlin.coreLibrariesVersion
 
 repositories {
