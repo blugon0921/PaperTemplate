@@ -1,0 +1,30 @@
+[versions]
+kotlin = "2.0.21"
+shadowJar = "8.3.3"
+run_paper = "2.3.1"
+plugin_yml = "0.6.0"
+#lib
+paper = "1.21.1-R0.1-SNAPSHOT"
+coroutine = "latest.release"
+mc_coroutine = "latest.release"
+#my
+plugin_utils = "latest.release"
+kotlin_brigadier = "latest.release"
+mini_color = "latest.release"
+
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+shadowJar = { id = "com.gradleup.shadow", version.ref = "shadowJar" }
+pluginYml = { id = "net.minecrell.plugin-yml.paper", version.ref = "plugin_yml" }
+runPaper = { id = "xyz.jpenilla.run-paper", version.ref = "run_paper" }
+
+[libraries]
+paper = { group = "io.papermc.paper", name = "paper-api", version.ref = "paper" }
+coroutine = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutine" }
+mcCoroutine = { group = "com.github.shynixn.mccoroutine", name = "mccoroutine-bukkit-api", version.ref = "mc_coroutine" }
+mcCoroutineCore = { group = "com.github.shynixn.mccoroutine", name = "mccoroutine-bukkit-core", version.ref = "mc_coroutine" }
+#my
+pluginUtils = { group = "kr.blugon", name = "plugin-utils", version.ref = "plugin_utils" }
+kotlinBrigadier = { group = "kr.blugon", name = "kotlin-brigadier", version.ref = "kotlin_brigadier" }
+miniColor = { group = "kr.blugon", name = "mini-color", version.ref = "mini_color" }

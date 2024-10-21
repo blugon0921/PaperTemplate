@@ -1,9 +1,10 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    kotlin("jvm") version "2.0.10"
-    id("com.gradleup.shadow") version "8.3.0"
-    id("io.papermc.paperweight.userdev") version "1.7.2"
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.pluginYml)
+    alias(libs.plugins.runPaper)
+    alias(libs.plugins.shadowJar)
 }
 
 java {
@@ -13,28 +14,36 @@ java {
 }
 
 val buildPath = File("C:/Files/Minecraft/Servers/Default/plugins")
-val mcVersion = "1.21.1"
-val kotlinVersion = kotlin.coreLibrariesVersion
 
 repositories {
     mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.blugon.kr/repository/maven-public/")
 }
 
 dependencies {
-    compileOnly(kotlin("stdlib"))
-    compileOnly(kotlin("reflect"))
-    paperweight.paperDevBundle("${mcVersion}-R0.1-SNAPSHOT")
-    implementation("kr.blugon:plugin-utils:latest.release")
-    implementation("kr.blugon:mini-color:latest.release")
-    implementation("kr.blugon:kotlin-brigadier:latest.release")
+    paperLibrary(kotlin("stdlib"))
+    compileOnly(libs.paper)
+
+    paperLibrary(libs.coroutine)
+    paperLibrary(libs.mcCoroutine)
+    paperLibrary(libs.mcCoroutineCore)
+
+    paperLibrary(libs.pluginUtils)
+    paperLibrary(libs.kotlinBrigadier)
+    paperLibrary(libs.miniColor)
 }
 
-extra.apply {
-    set("ProjectName", project.name)
-    set("ProjectVersion", project.version)
-    set("KotlinVersion", kotlinVersion)
-    set("MinecraftVersion", mcVersion.split(".").subList(0, 2).joinToString("."))
+paper {
+    main = "$group.${project.name.lowercase()}.${project.name}"
+    loader = "$group.${project.name.lowercase()}.loader.${project.name}Loader"
+
+    version = project.version.toString()
+    apiVersion = libs.versions.paper.get().replace("-R0.1-SNAPSHOT", "")
+    author = "Blugon"
+    prefix = project.name
+
+    generateLibrariesJson = true
 }
 
 tasks {
@@ -44,25 +53,16 @@ tasks {
         }
     }
 
-    processResources {
-        filesMatching("*.yml") {
-            expand(project.properties)
-            expand(extra.properties)
-        }
-    }
+    create<Jar>("buildPaper") { this.build() }
+    shadowJar { this.build() }
 
-    create<Jar>("buildPaper") {
-        this.build()
-    }
-
-    shadowJar {
-        this.build()
+    runServer {
+        minecraftVersion(libs.versions.paper.get().replace("-R0.1-SNAPSHOT", ""))
+        jvmArgs = listOf("-Dcom.mojang.eula.agree=true")
     }
 }
 
 fun Jar.build() {
-    val file = File("./build/libs/${project.name}.jar")
-    if(file.exists()) file.deleteOnExit()
     archiveBaseName.set(project.name) //Project Name
     archiveFileName.set("${project.name}.jar") //Build File Name
     archiveVersion.set(project.version.toString()) //Version
