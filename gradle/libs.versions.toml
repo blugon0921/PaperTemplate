@@ -1,10 +1,10 @@
 [versions]
-kotlin = "2.1.20"
-shadowJar = "8.3.5"
+kotlin = "2.2.0"
+shadowJar = "8.3.7"
 run_paper = "2.3.1"
 plugin_yml = "0.6.0"
 #lib
-paper = "1.21.5-R0.1-SNAPSHOT"
+paper = "1.21.6-R0.1-SNAPSHOT"
 coroutine = "latest.release"
 mc_coroutine = "latest.release"
 #my
