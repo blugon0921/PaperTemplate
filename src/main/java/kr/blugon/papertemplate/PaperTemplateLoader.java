@@ -1,4 +1,4 @@
-package kr.blugon.papertemplate.loader;
+package kr.blugon.papertemplate;
 
 import com.google.gson.Gson;
 import io.papermc.paper.plugin.loader.PluginClasspathBuilder;
@@ -24,7 +24,7 @@ public class PaperTemplateLoader implements PluginLoader {
         MavenLibraryResolver resolver = new MavenLibraryResolver();
         PluginLibraries pluginLibraries = load();
         pluginLibraries.asDependencies().forEach(resolver::addDependency);
-        pluginLibraries.asRepositories().forEach(resolver::addRepository);
+//        pluginLibraries.asRepositories().forEach(resolver::addRepository);
         classpathBuilder.addLibrary(resolver);
     }
 

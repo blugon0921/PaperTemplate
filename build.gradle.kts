@@ -3,8 +3,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.pluginYml)
-    alias(libs.plugins.runPaper)
     alias(libs.plugins.shadowJar)
+    alias(libs.plugins.runPaper)
 }
 
 java {
@@ -29,14 +29,14 @@ dependencies {
     paperLibrary(libs.mcCoroutine)
     paperLibrary(libs.mcCoroutineCore)
 
-    paperLibrary(libs.pluginUtils)
-    paperLibrary(libs.kotlinBrigadier)
-    paperLibrary(libs.miniColor)
+    implementation(libs.pluginUtils)
+    implementation(libs.kotlinBrigadier)
+    implementation(libs.miniColor)
 }
 
 paper {
     main = "$group.${project.name.lowercase()}.${project.name}"
-    loader = "$group.${project.name.lowercase()}.loader.${project.name}Loader"
+    loader = "$group.${project.name.lowercase()}.${project.name}Loader"
 
     version = project.version.toString()
     apiVersion = libs.versions.paper.get().replace("-R0.1-SNAPSHOT", "")
@@ -53,7 +53,7 @@ tasks {
         }
     }
 
-    create<Jar>("buildPaper") { this.build() }
+    register<Jar>("buildPaper") { this.build() }
     shadowJar { this.build() }
 
     runServer {
