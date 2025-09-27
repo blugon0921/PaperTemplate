@@ -25,6 +25,7 @@ public class PaperTemplateLoader implements PluginLoader {
         PluginLibraries pluginLibraries = load();
         pluginLibraries.asDependencies().forEach(resolver::addDependency);
 //        pluginLibraries.asRepositories().forEach(resolver::addRepository);
+        resolver.addRepository(new RemoteRepository.Builder("paper", "default", "https://repo.papermc.io/repository/maven-public/").build());
         classpathBuilder.addLibrary(resolver);
     }
 
