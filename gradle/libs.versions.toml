@@ -1,10 +1,10 @@
 [versions]
 kotlin = "2.2.20"
-shadowJar = "8.3.7"
+shadowJar = "9.2.2"
 plugin_yml = "0.6.0"
 run_paper = "2.3.1"
 #lib
-paper = "1.21.8-R0.1-SNAPSHOT"
+paper = "1.21.10-R0.1-SNAPSHOT"
 coroutine = "latest.release"
 mc_coroutine = "latest.release"
 #my
